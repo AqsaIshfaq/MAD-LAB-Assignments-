@@ -1,0 +1,58 @@
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+
+const Board = () => {
+  const board = [];
+
+  for (let i = 0; i < 8; i++) {
+    const row = [];
+
+    for (let j = 0; j < 8; j++) {
+      const color = (i + j) % 2 === 0 ? 'black' : 'pink';
+      row.push(
+        <View key={`${i}-${j}`} style={[styles.cell, { backgroundColor: color }]} />
+      );
+    }
+
+    board.push(
+      <View key={i} style={styles.row}>
+        {row}
+      </View>
+    );
+  }
+
+  return <View style={styles.board}>{board}</View>;
+};
+
+const ChessScreen = () => {
+  return (
+    <View style={styles.container}>
+      <Board />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  board: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cell: {
+    width: 40,
+    height: 40,
+  },
+});
+
+export default ChessScreen;
